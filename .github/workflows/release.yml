@@ -25,9 +25,9 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm ci --ignore-scripts
       - name: Build 📦
-        run: npm run build:lib && npm run release
+        run: npm run build:lib
       - name: Release 🚀
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+        run: cd dist/schedule-x/angular && npx semantic-release

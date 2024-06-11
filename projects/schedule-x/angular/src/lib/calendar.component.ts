@@ -13,7 +13,7 @@ export const randomStringId = () =>
   `,
   styles: ``
 })
-export class ScheduleXCalendarComponent implements AfterViewInit {
+export class CalendarComponent implements AfterViewInit {
   @Input() calendarApp: CalendarApp;
 
   public randomId = randomStringId();

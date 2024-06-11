@@ -1,6 +1,6 @@
 import {Component, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {ScheduleXCalendarComponent} from "../../../schedule-x/angular/src/lib/schedule-x-calendar.component";
+import {CalendarComponent} from "../../../schedule-x/angular/src/lib/calendar.component";
 import {createCalendar, viewWeek} from "@schedule-x/calendar";
 import {isPlatformBrowser, NgIf} from '@angular/common';
 import '@schedule-x/theme-default/dist/calendar.css'
@@ -8,7 +8,7 @@ import '@schedule-x/theme-default/dist/calendar.css'
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ScheduleXCalendarComponent, NgIf],
+  imports: [RouterOutlet, CalendarComponent, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

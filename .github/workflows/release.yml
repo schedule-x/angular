@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - 'ci/semantic_release'
 
 jobs:
   release:
@@ -26,7 +25,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm ci --ignore-scripts
       - name: Build 📦
-        run: npm run build:lib && npm run pack:lib
+        run: npm run build:lib && npm run release
       - name: Release 🚀
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

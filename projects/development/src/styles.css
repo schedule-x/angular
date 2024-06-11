@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.ng-calendar-wrapper {
+  width: 1200px;
+  max-width: 90%;
+  height: 800px;
+}

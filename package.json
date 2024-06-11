@@ -1,6 +1,7 @@
 {
   "name": "angular-connector",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start:dev": "ng serve --project development",

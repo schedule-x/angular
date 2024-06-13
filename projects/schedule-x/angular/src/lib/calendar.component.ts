@@ -3,14 +3,13 @@ import {
   Component,
   ContentChild,
   Input,
-  TemplateRef, ViewChild, ViewContainerRef
+  TemplateRef
 } from '@angular/core';
 import {CalendarApp} from "@schedule-x/calendar";
 import {CustomComponentMeta, CustomComponentsMeta} from "../types/custom-components";
 import {createCustomComponentFn} from "../utils/create-custom-component-fn";
 import {CommonModule, NgTemplateOutlet} from "@angular/common";
-import {TransportContainerComponent} from "../utils/transport-container.component";
-import {OffscreenFragmentComponent} from "../utils/offscreen-fragment.component";
+import {SxPortalComponent} from "../utils/sx-portal.component";
 
 export const randomStringId = () =>
   's' + Math.random().toString(36).substring(2, 11)
@@ -21,25 +20,18 @@ export const randomStringId = () =>
   imports: [
     NgTemplateOutlet,
     CommonModule,
-    TransportContainerComponent,
-    OffscreenFragmentComponent,
+    SxPortalComponent,
   ],
   template: `
     <div [attr.id]="randomId" class="ng-calendar-wrapper"></div>
 
-    <offscreen-fragment>
-      <transport-container
-        *ngFor="let comp of customComponentsMeta;"
-        [wrapperEl]="comp.wrapperElement"
-        [elTag]="'div'"
-        [elClasses]="comp.Component.elementRef.nativeElement.classList"
-        [elStyle]="comp.Component.elementRef.nativeElement.style"
-        [elAttrs]="comp.Component.elementRef.nativeElement.attributes"
-        [template]="getTemplate(comp.componentName)"
-        [renderProps]="comp.props"
-      ></transport-container>
-    </offscreen-fragment>
-
+    <sx-portal
+      *ngFor="let comp of customComponentsMeta;"
+      [wrapperEl]="comp.wrapperElement"
+      [elTag]="'div'"
+      [template]="getTemplate(comp.componentName)"
+      [renderProps]="comp.props"
+    ></sx-portal>
   `,
   styles: ``
 })
@@ -49,20 +41,14 @@ export class CalendarComponent implements AfterViewInit {
   @ContentChild('timeGridEvent') timeGridEvent: TemplateRef<any>;
   @ContentChild('dateGridEvent') dateGridEvent: TemplateRef<any>;
 
-  @ViewChild('container', {read: ViewContainerRef}) container!: ViewContainerRef;
-
   customComponentsMeta: CustomComponentsMeta = []
 
   public randomId = randomStringId();
 
   getTemplate(componentName: string): TemplateRef<any> {
-    if (componentName === 'timeGridEvent') {
-      return this.timeGridEvent
-    }
+    if (componentName === 'timeGridEvent') return this.timeGridEvent
 
-    if (componentName === 'dateGridEvent') {
-      return this.dateGridEvent
-    }
+    if (componentName === 'dateGridEvent') return this.dateGridEvent
 
     throw new Error(`No template found for component name: ${componentName}`)
   }
@@ -120,5 +106,4 @@ export class CalendarComponent implements AfterViewInit {
 
     this.customComponentsMeta = [...newCustomComponents, component]
   }
-  protected readonly HTMLElement = HTMLElement;
 }

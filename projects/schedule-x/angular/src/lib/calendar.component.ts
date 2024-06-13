@@ -30,7 +30,7 @@ export const randomStringId = () =>
     <offscreen-fragment>
       <transport-container
         *ngFor="let comp of customComponentsMeta;"
-        [inPlaceOf]="comp.wrapperElement"
+        [wrapperEl]="comp.wrapperElement"
         [elTag]="'div'"
         [elClasses]="comp.Component.elementRef.nativeElement.classList"
         [elStyle]="comp.Component.elementRef.nativeElement.style"
@@ -99,7 +99,26 @@ export class CalendarComponent implements AfterViewInit {
     const wrapperWasDetached = !(component.wrapperElement instanceof HTMLElement);
     if (wrapperWasDetached) return
 
-    this.customComponentsMeta = [...this.customComponentsMeta, component]
+    const filterOutComponentsWithDetachedWrappers = ({ wrapperElement }: { wrapperElement: HTMLElement | null }) =>
+      wrapperElement instanceof HTMLElement
+    const newCustomComponents = [
+      ...this.customComponentsMeta.filter(filterOutComponentsWithDetachedWrappers)
+    ]
+
+    const ccid = component.wrapperElement.dataset['ccid']
+    const existingComponent = newCustomComponents.find(
+      ({ wrapperElement }) => wrapperElement.dataset['ccid'] === ccid
+    )
+
+    if (existingComponent) {
+      existingComponent.wrapperElement.innerHTML = ''
+      newCustomComponents.splice(
+        newCustomComponents.indexOf(existingComponent),
+        1
+      )
+    }
+
+    this.customComponentsMeta = [...newCustomComponents, component]
   }
   protected readonly HTMLElement = HTMLElement;
 }

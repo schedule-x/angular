@@ -14,6 +14,10 @@ import {CommonModule} from "@angular/common";
 
 const dummyContainer = typeof document !== 'undefined' ? document.createDocumentFragment() : null;
 
+const appendElement = (subject: HTMLElement, wrapperEl: HTMLElement): void => {
+  wrapperEl.appendChild(subject)
+};
+
 @Component({
   selector: 'transport-container',
   imports: [CommonModule],
@@ -21,72 +25,22 @@ const dummyContainer = typeof document !== 'undefined' ? document.createDocument
   encapsulation: ViewEncapsulation.None,
   standalone: true,
 })
-export class TransportContainerComponent implements OnChanges, AfterViewInit, OnDestroy {
-  @Input() inPlaceOf!: HTMLElement; // required
-  // @Input() reportEl!: (el: HTMLElement | null) => void; // required
-  @Input() elTag!: string; // required
+export class TransportContainerComponent implements AfterViewInit {
+  @Input() wrapperEl!: HTMLElement;
+  @Input() elTag!: string;
   @Input() elClasses?: string[];
   @Input() elStyle?: Record<string, unknown>;
   @Input() elAttrs?: Record<string, unknown>;
-  @Input() template!: TemplateRef<any>; // required
+  @Input() template!: TemplateRef<any>;
   @Input() renderProps?: any;
 
   @ViewChild('rootEl') rootElRef?: ElementRef;
 
   ngAfterViewInit() {
-    const rootEl: Element = this.rootElRef?.nativeElement; // assumed defined
-
-    replaceEl(rootEl, this.inPlaceOf);
+    const rootEl: HTMLElement = this.rootElRef?.nativeElement;
+    appendElement(rootEl, this.wrapperEl);
     applyElAttrs(rootEl, undefined, this.elAttrs);
-
-    // insurance for if Preact recreates and reroots inPlaceOf element
-    // this.inPlaceOf.style.display = 'none';
-
-    // this.reportEl(rootEl as HTMLElement);
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const rootEl: Element | undefined = this.rootElRef?.nativeElement;
-
-    // ngOnChanges is called before ngAfterViewInit (and before DOM initializes)
-    // so make sure rootEl is defined before doing anything
-    if (rootEl) {
-      // If the ContentContainer's tagName changed, it will create a new DOM element in its
-      // original place. Detect this and re-replace.
-      if (this.inPlaceOf.parentNode !== dummyContainer) {
-        replaceEl(rootEl, this.inPlaceOf);
-        applyElAttrs(rootEl, undefined, this.elAttrs);
-        // this.reportEl(rootEl as HTMLElement);
-      } else {
-        const elAttrsChange = changes['elAttrs'];
-
-        if (elAttrsChange) {
-          applyElAttrs(rootEl, elAttrsChange.previousValue, elAttrsChange.currentValue);
-        }
-      }
-    }
-  }
-
-  // invoked BEFORE component removed from DOM
-  ngOnDestroy() {
-    if (
-      // protect against Preact recreating and rerooting inPlaceOf element
-      this.inPlaceOf.parentNode === dummyContainer &&
-      dummyContainer
-    ) {
-      dummyContainer.removeChild(this.inPlaceOf);
-    }
-
-    // this.reportEl(null);
-  }
-}
-
-function replaceEl(subject: Element, inPlaceOf: Element): void {
-  // inPlaceOf.parentNode?.insertBefore(subject, inPlaceOf.nextSibling);
-  inPlaceOf.appendChild(subject)
-  // if (dummyContainer) {
-  //   dummyContainer.appendChild(inPlaceOf);
-  // }
 }
 
 function applyElAttrs(

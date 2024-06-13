@@ -1,9 +1,11 @@
 import {Component, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {CalendarComponent} from "../../../schedule-x/angular/src/lib/calendar.component";
-import {createCalendar, viewWeek} from "@schedule-x/calendar";
+import {createCalendar, viewWeek, viewMonthGrid} from "@schedule-x/calendar";
 import {isPlatformBrowser, NgIf} from '@angular/common';
 import '@schedule-x/theme-default/dist/calendar.css'
+import {createEventModalPlugin} from "@schedule-x/event-modal";
+import {createDragAndDropPlugin} from "@schedule-x/drag-and-drop";
 
 @Component({
   selector: 'app-root',
@@ -41,7 +43,11 @@ export class AppComponent {
         end: '2024-06-13',
       }
     ],
-    views: [viewWeek]
+    views: [viewWeek, viewMonthGrid],
+    plugins: [
+      createEventModalPlugin(),
+      createDragAndDropPlugin()
+    ]
   })
 
   constructor(
@@ -50,5 +56,24 @@ export class AppComponent {
 
   get isBrowserOnly(): boolean {
     return isPlatformBrowser(this.platformId);
+  }
+
+  setEvents() {
+    console.log('this runs')
+
+    this.calendarApp.events.set([
+      {
+        id: '5',
+        title: 'Event 5',
+        start: '2024-06-11 08:00',
+        end: '2024-06-11 09:00',
+      },
+      {
+        id: '6',
+        title: 'Event 6',
+        start: '2024-06-11 10:00',
+        end: '2024-06-11 11:00',
+      },
+    ])
   }
 }

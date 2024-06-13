@@ -21,6 +21,24 @@ export class AppComponent {
         title: 'Event 1',
         start: '2024-06-11 08:00',
         end: '2024-06-11 09:00',
+      },
+      {
+        id: '2',
+        title: 'Event 2',
+        start: '2024-06-11 10:00',
+        end: '2024-06-11 11:00',
+      },
+      {
+        id: '3',
+        title: 'Event 3',
+        start: '2024-06-11',
+        end: '2024-06-11',
+      },
+      {
+        id: '4',
+        title: 'Event 4',
+        start: '2024-06-11',
+        end: '2024-06-13',
       }
     ],
     views: [viewWeek]

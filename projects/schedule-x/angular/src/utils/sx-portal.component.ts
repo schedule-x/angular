@@ -17,16 +17,16 @@ import {CommonModule} from "@angular/common";
   standalone: true,
 })
 export class SxPortalComponent implements AfterViewInit {
-  @Input() wrapperEl!: HTMLElement;
-  @Input() elTag!: string;
+  @Input() wrapperElement!: HTMLElement;
+  @Input() elementTag!: string;
   @Input() template!: TemplateRef<any>;
-  @Input() renderProps?: any;
+  @Input() props?: any;
 
   @ViewChild('rootEl') rootElRef?: ElementRef;
 
   ngAfterViewInit() {
-    console.log(this.renderProps)
+    console.log(this.props)
     const rootEl: HTMLElement = this.rootElRef?.nativeElement;
-    this.wrapperEl.appendChild(rootEl);
+    this.wrapperElement.appendChild(rootEl);
   }
 }

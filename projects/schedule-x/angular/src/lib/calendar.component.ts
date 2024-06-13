@@ -23,14 +23,14 @@ export const randomStringId = () =>
     SxPortalComponent,
   ],
   template: `
-    <div [attr.id]="randomId" class="ng-calendar-wrapper"></div>
+    <div [attr.id]="calendarElementId" class="ng-calendar-wrapper"></div>
 
     <sx-portal
       *ngFor="let comp of customComponentsMeta;"
-      [wrapperEl]="comp.wrapperElement"
-      [elTag]="'div'"
+      [wrapperElement]="comp.wrapperElement"
+      [elementTag]="'div'"
       [template]="getTemplate(comp.componentName)"
-      [renderProps]="comp.props"
+      [props]="comp.props"
     ></sx-portal>
   `,
   styles: ``
@@ -43,7 +43,7 @@ export class CalendarComponent implements AfterViewInit {
 
   customComponentsMeta: CustomComponentsMeta = []
 
-  public randomId = randomStringId();
+  public calendarElementId = randomStringId();
 
   getTemplate(componentName: string): TemplateRef<any> {
     if (componentName === 'timeGridEvent') return this.timeGridEvent
@@ -56,7 +56,7 @@ export class CalendarComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (typeof window !== 'object') return
 
-    const calendarElement = document.getElementById(this.randomId);
+    const calendarElement = document.getElementById(this.calendarElementId);
     if (!(calendarElement instanceof HTMLElement)) {
       throw new Error('No calendar element found')
     }

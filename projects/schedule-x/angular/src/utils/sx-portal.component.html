@@ -1,8 +1,8 @@
-<ng-template [ngIf]="elTag == 'div'">
+<ng-template [ngIf]="elementTag == 'div'">
   <div style="height: 100%; width: 100%" #rootEl>
     <ng-container
       [ngTemplateOutlet]="template"
-      [ngTemplateOutletContext]="{ $implicit: renderProps }"
+      [ngTemplateOutletContext]="{ $implicit: props }"
     ></ng-container>
   </div>
 </ng-template>

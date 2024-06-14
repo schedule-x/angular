@@ -1,7 +1,7 @@
 import {Component, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {CalendarComponent} from "../../../schedule-x/angular/src/lib/calendar.component";
-import {createCalendar, viewWeek, viewMonthGrid} from "@schedule-x/calendar";
+import {createCalendar, viewWeek, viewMonthGrid, viewMonthAgenda} from "@schedule-x/calendar";
 import {isPlatformBrowser, NgIf} from '@angular/common';
 import '@schedule-x/theme-default/dist/calendar.css'
 import {createEventModalPlugin} from "@schedule-x/event-modal";
@@ -43,7 +43,7 @@ export class AppComponent {
         end: '2024-06-13',
       }
     ],
-    views: [viewWeek, viewMonthGrid],
+    views: [viewWeek, viewMonthGrid, viewMonthAgenda],
     plugins: [
       createEventModalPlugin(),
       createDragAndDropPlugin()
@@ -59,8 +59,6 @@ export class AppComponent {
   }
 
   setEvents() {
-    console.log('this runs')
-
     this.calendarApp.events.set([
       {
         id: '5',

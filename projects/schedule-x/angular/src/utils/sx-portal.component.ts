@@ -25,7 +25,6 @@ export class SxPortalComponent implements AfterViewInit {
   @ViewChild('rootEl') rootElRef?: ElementRef;
 
   ngAfterViewInit() {
-    console.log(this.props)
     const rootEl: HTMLElement = this.rootElRef?.nativeElement;
     this.wrapperElement.appendChild(rootEl);
   }

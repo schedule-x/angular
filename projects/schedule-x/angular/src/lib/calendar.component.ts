@@ -40,6 +40,9 @@ export class CalendarComponent implements AfterViewInit {
 
   @ContentChild('timeGridEvent') timeGridEvent: TemplateRef<any>;
   @ContentChild('dateGridEvent') dateGridEvent: TemplateRef<any>;
+  @ContentChild('monthGridEvent') monthGridEvent: TemplateRef<any>;
+  @ContentChild('monthAgendaEvent') monthAgendaEvent: TemplateRef<any>;
+  @ContentChild('eventModal') eventModal: TemplateRef<any>;
 
   customComponentsMeta: CustomComponentsMeta = []
 
@@ -49,6 +52,12 @@ export class CalendarComponent implements AfterViewInit {
     if (componentName === 'timeGridEvent') return this.timeGridEvent
 
     if (componentName === 'dateGridEvent') return this.dateGridEvent
+
+    if (componentName === 'monthGridEvent') return this.monthGridEvent
+
+    if (componentName === 'monthAgendaEvent') return this.monthAgendaEvent
+
+    if (componentName === 'eventModal') return this.eventModal
 
     throw new Error(`No template found for component name: ${componentName}`)
   }
@@ -77,6 +86,27 @@ export class CalendarComponent implements AfterViewInit {
       this.calendarApp._setCustomComponentFn(
         'dateGridEvent',
         createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.dateGridEvent, 'dateGridEvent')
+      )
+    }
+
+    if (this.monthGridEvent) {
+      this.calendarApp._setCustomComponentFn(
+        'monthGridEvent',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.monthGridEvent, 'monthGridEvent')
+      )
+    }
+
+    if (this.monthAgendaEvent) {
+      this.calendarApp._setCustomComponentFn(
+        'monthAgendaEvent',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.monthAgendaEvent, 'monthAgendaEvent')
+      )
+    }
+
+    if (this.eventModal) {
+      this.calendarApp._setCustomComponentFn(
+        'eventModal',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.eventModal, 'eventModal')
       )
     }
   }

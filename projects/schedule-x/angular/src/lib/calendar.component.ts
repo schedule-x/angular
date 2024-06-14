@@ -10,6 +10,7 @@ import {CustomComponentMeta, CustomComponentsMeta} from "../types/custom-compone
 import {createCustomComponentFn} from "../utils/create-custom-component-fn";
 import {CommonModule, NgTemplateOutlet} from "@angular/common";
 import {SxPortalComponent} from "../utils/sx-portal.component";
+import type {CalendarEvent} from "@schedule-x/calendar";
 
 export const randomStringId = () =>
   's' + Math.random().toString(36).substring(2, 11)

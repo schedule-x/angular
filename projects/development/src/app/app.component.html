@@ -11,9 +11,6 @@
   main {
     width: 100%;
     min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 1rem;
     box-sizing: inherit;
     position: relative;
@@ -22,7 +19,39 @@
 
 <main class="main">
   <div class="content">
-    <sx-calendar *ngIf="isBrowserOnly" [calendarApp]="calendarApp"></sx-calendar>
+    <button (click)="setEvents()">set events</button>
+
+    <sx-calendar *ngIf="isBrowserOnly" [calendarApp]="calendarApp">
+      <ng-template #timeGridEvent let-arg>
+        <div style="background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%;border-radius: 5px;padding: 5px">
+          <div>Time grid event: {{ arg.calendarEvent.title }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template #dateGridEvent let-arg>
+        <div style="overflow: hidden;display: flex; align-items: center; background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%;border-radius: 5px">
+          <div>Date grid: {{ arg.calendarEvent.title }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template #monthGridEvent let-arg>
+        <div style="overflow: hidden;display: flex; align-items: center; background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%;border-radius: 5px">
+          <div>Month grid: {{ arg.calendarEvent.title }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template #monthAgendaEvent let-arg>
+        <div style="overflow: hidden;display: flex; align-items: center; background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%;border-radius: 5px">
+          <div>Month agenda: {{ arg.calendarEvent.title }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template #eventModal let-arg>
+        <div style="overflow: hidden;display: flex; align-items: center; border: 2px solid black; height: 100%; width: 100%;border-radius: 5px;">
+          <div>Event modal: {{ arg.calendarEvent.title }}</div>
+        </div>
+      </ng-template>
+    </sx-calendar>
   </div>
 </main>
 

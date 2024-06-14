@@ -59,6 +59,11 @@ export class AppComponent {
   }
 
   setEvents() {
+    // const allEvents = this.calendarApp.events.getAll()
+    // allEvents.forEach(event => {
+    //   event.title = 'New Title'
+    // })
+    // this.calendarApp.events.set(allEvents)
     this.calendarApp.events.set([
       {
         id: '5',

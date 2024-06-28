@@ -43,6 +43,10 @@ export class CalendarComponent implements AfterViewInit {
   @ContentChild('dateGridEvent') dateGridEvent: TemplateRef<any>;
   @ContentChild('monthGridEvent') monthGridEvent: TemplateRef<any>;
   @ContentChild('monthAgendaEvent') monthAgendaEvent: TemplateRef<any>;
+  @ContentChild('headerContentLeftPrepend') headerContentLeftPrepend: TemplateRef<any>;
+  @ContentChild('headerContentLeftAppend') headerContentLeftAppend: TemplateRef<any>;
+  @ContentChild('headerContentRightPrepend') headerContentRightPrepend: TemplateRef<any>;
+  @ContentChild('headerContentRightAppend') headerContentRightAppend: TemplateRef<any>;
   @ContentChild('eventModal') eventModal: TemplateRef<any>;
 
   customComponentsMeta: CustomComponentsMeta = []
@@ -59,6 +63,14 @@ export class CalendarComponent implements AfterViewInit {
     if (componentName === 'monthAgendaEvent') return this.monthAgendaEvent
 
     if (componentName === 'eventModal') return this.eventModal
+
+    if (componentName === 'headerContentLeftPrepend') return this.headerContentLeftPrepend
+
+    if (componentName === 'headerContentLeftAppend') return this.headerContentLeftAppend
+
+    if (componentName === 'headerContentRightPrepend') return this.headerContentRightPrepend
+
+    if (componentName === 'headerContentRightAppend') return this.headerContentRightAppend
 
     throw new Error(`No template found for component name: ${componentName}`)
   }
@@ -108,6 +120,34 @@ export class CalendarComponent implements AfterViewInit {
       this.calendarApp._setCustomComponentFn(
         'eventModal',
         createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.eventModal, 'eventModal')
+      )
+    }
+
+    if (this.headerContentLeftPrepend) {
+      this.calendarApp._setCustomComponentFn(
+        'headerContentLeftPrepend',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentLeftPrepend, 'headerContentLeftPrepend')
+      )
+    }
+
+    if (this.headerContentLeftAppend) {
+      this.calendarApp._setCustomComponentFn(
+        'headerContentLeftAppend',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentLeftAppend, 'headerContentLeftAppend')
+      )
+    }
+
+    if (this.headerContentRightPrepend) {
+      this.calendarApp._setCustomComponentFn(
+        'headerContentRightPrepend',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentRightPrepend, 'headerContentRightPrepend')
+      )
+    }
+
+    if (this.headerContentRightAppend) {
+      this.calendarApp._setCustomComponentFn(
+        'headerContentRightAppend',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentRightAppend, 'headerContentRightAppend')
       )
     }
   }

@@ -22,6 +22,22 @@
     <button (click)="setEvents()">set events</button>
 
     <sx-calendar *ngIf="isBrowserOnly" [calendarApp]="calendarApp">
+      <ng-template #headerContentLeftPrepend>
+        <div>L prepend</div>
+      </ng-template>
+
+      <ng-template #headerContentLeftAppend>
+        <div>L append</div>
+      </ng-template>
+
+      <ng-template #headerContentRightPrepend>
+        <div>R prepend</div>
+      </ng-template>
+
+      <ng-template #headerContentRightAppend>
+        <div>R append</div>
+      </ng-template>
+
       <ng-template #timeGridEvent let-arg>
         <div style="background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%;border-radius: 5px;padding: 5px">
           <div>Time grid event: {{ arg.calendarEvent.title }}</div>

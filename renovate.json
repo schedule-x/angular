@@ -9,7 +9,8 @@
     },
     {
       "groupName": "Schedule-X monorepo packages",
-      "packagePatterns": ["^@schedule-x.*"]
+      "packagePatterns": ["^@schedule-x.*"],
+      "rangeStrategy": "bump"
     }
   ],
   "ignoreDeps": ["react", "react-dom"]

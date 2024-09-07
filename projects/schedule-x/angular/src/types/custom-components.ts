@@ -12,6 +12,7 @@ export type CustomComponents = {
   headerContentLeftAppend?: CalendarTemplate
   headerContentRightPrepend?: CalendarTemplate
   headerContentRightAppend?: CalendarTemplate
+  headerContent?: CalendarTemplate
 }
 export type CustomComponentMeta = {
   Component: CalendarTemplate

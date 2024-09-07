@@ -47,6 +47,7 @@ export class CalendarComponent implements AfterViewInit {
   @ContentChild('headerContentLeftAppend') headerContentLeftAppend: TemplateRef<any>;
   @ContentChild('headerContentRightPrepend') headerContentRightPrepend: TemplateRef<any>;
   @ContentChild('headerContentRightAppend') headerContentRightAppend: TemplateRef<any>;
+  @ContentChild('headerContent') headerContent: TemplateRef<any>;
   @ContentChild('eventModal') eventModal: TemplateRef<any>;
 
   customComponentsMeta: CustomComponentsMeta = []
@@ -71,6 +72,8 @@ export class CalendarComponent implements AfterViewInit {
     if (componentName === 'headerContentRightPrepend') return this.headerContentRightPrepend
 
     if (componentName === 'headerContentRightAppend') return this.headerContentRightAppend
+
+    if (componentName === 'headerContent') return this.headerContent
 
     throw new Error(`No template found for component name: ${componentName}`)
   }
@@ -148,6 +151,13 @@ export class CalendarComponent implements AfterViewInit {
       this.calendarApp._setCustomComponentFn(
         'headerContentRightAppend',
         createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentRightAppend, 'headerContentRightAppend')
+      )
+    }
+
+    if (this.headerContent) {
+      this.calendarApp._setCustomComponentFn(
+        'headerContent',
+        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContent, 'headerContent')
       )
     }
   }

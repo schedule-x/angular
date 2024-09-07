@@ -22,6 +22,10 @@
     <button (click)="setEvents()">set events</button>
 
     <sx-calendar *ngIf="isBrowserOnly" [calendarApp]="calendarApp">
+      <ng-template #headerContent>
+        <div>Custom header</div>
+      </ng-template>
+
       <ng-template #headerContentLeftPrepend>
         <div>L prepend</div>
       </ng-template>

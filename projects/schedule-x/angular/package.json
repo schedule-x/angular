@@ -12,7 +12,7 @@
   "peerDependencies": {
     "@angular/common": "14 - 18",
     "@angular/core": "14 - 18",
-    "@schedule-x/calendar": "^1.63.1"
+    "@schedule-x/calendar": "^2.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -8,11 +8,10 @@ import {createEventModalPlugin} from "@schedule-x/event-modal";
 import {createDragAndDropPlugin} from "@schedule-x/drag-and-drop";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CalendarComponent, NgIf],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [RouterOutlet, CalendarComponent, NgIf],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'development';

@@ -10,11 +10,10 @@ import {
 import {CommonModule} from "@angular/common";
 
 @Component({
-  selector: 'sx-portal',
-  imports: [CommonModule],
-  templateUrl: './sx-portal.component.html',
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
+    selector: 'sx-portal',
+    imports: [CommonModule],
+    templateUrl: './sx-portal.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class SxPortalComponent implements AfterViewInit {
   @Input() wrapperElement!: HTMLElement;

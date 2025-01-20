@@ -8,9 +8,8 @@ import {
 import {CalendarApp} from "@schedule-x/calendar";
 import {CustomComponentMeta, CustomComponentsMeta} from "../types/custom-components";
 import {createCustomComponentFn} from "../utils/create-custom-component-fn";
-import {CommonModule, NgTemplateOutlet} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {SxPortalComponent} from "../utils/sx-portal.component";
-import type {CalendarEvent} from "@schedule-x/calendar";
 
 export const randomStringId = () =>
   's' + Math.random().toString(36).substring(2, 11)
@@ -18,7 +17,6 @@ export const randomStringId = () =>
 @Component({
     selector: 'sx-calendar',
     imports: [
-        NgTemplateOutlet,
         CommonModule,
         SxPortalComponent,
     ],

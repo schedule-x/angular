@@ -10,8 +10,8 @@
   },
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "14 - 18",
-    "@angular/core": "14 - 18",
+    "@angular/common": "14 - 19",
+    "@angular/core": "14 - 19",
     "@schedule-x/calendar": "^2.14.2"
   },
   "dependencies": {

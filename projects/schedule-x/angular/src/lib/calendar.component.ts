@@ -16,14 +16,13 @@ export const randomStringId = () =>
   's' + Math.random().toString(36).substring(2, 11)
 
 @Component({
-  selector: 'sx-calendar',
-  standalone: true,
-  imports: [
-    NgTemplateOutlet,
-    CommonModule,
-    SxPortalComponent,
-  ],
-  template: `
+    selector: 'sx-calendar',
+    imports: [
+        NgTemplateOutlet,
+        CommonModule,
+        SxPortalComponent,
+    ],
+    template: `
     <div [attr.id]="calendarElementId" class="ng-calendar-wrapper"></div>
 
     <sx-portal
@@ -34,7 +33,7 @@ export const randomStringId = () =>
       [props]="comp.props"
     ></sx-portal>
   `,
-  styles: ``
+    styles: ``
 })
 export class CalendarComponent implements AfterViewInit {
   @Input() calendarApp: CalendarApp;

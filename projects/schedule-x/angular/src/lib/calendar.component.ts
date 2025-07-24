@@ -8,7 +8,7 @@ import {
 import {CalendarApp} from "@schedule-x/calendar";
 import {CustomComponentMeta, CustomComponentsMeta} from "../types/custom-components";
 import {createCustomComponentFn} from "../utils/create-custom-component-fn";
-
+import {CommonModule} from "@angular/common";
 import {SxPortalComponent} from "../utils/sx-portal.component";
 
 export const randomStringId = () =>
@@ -17,20 +17,20 @@ export const randomStringId = () =>
 @Component({
     selector: 'sx-calendar',
     imports: [
-    SxPortalComponent
-],
+        CommonModule,
+        SxPortalComponent,
+    ],
     template: `
     <div [attr.id]="calendarElementId" class="ng-calendar-wrapper"></div>
 
-    @for (comp of customComponentsMeta; track comp) {
-      <sx-portal
-        [wrapperElement]="comp.wrapperElement"
-        [elementTag]="'div'"
-        [template]="getTemplate(comp.componentName)"
-        [props]="comp.props"
-      ></sx-portal>
-    }
-    `,
+    <sx-portal
+      *ngFor="let comp of customComponentsMeta;"
+      [wrapperElement]="comp.wrapperElement"
+      [elementTag]="'div'"
+      [template]="getTemplate(comp.componentName)"
+      [props]="comp.props"
+    ></sx-portal>
+  `,
     styles: ``
 })
 export class CalendarComponent implements AfterViewInit {

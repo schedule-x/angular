@@ -21,7 +21,7 @@ export const randomStringId = () =>
 ],
     template: `
     <div [attr.id]="calendarElementId" class="ng-calendar-wrapper"></div>
-    
+
     @for (comp of customComponentsMeta; track comp) {
       <sx-portal
         [wrapperElement]="comp.wrapperElement"

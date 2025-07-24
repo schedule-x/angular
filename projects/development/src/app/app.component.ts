@@ -2,14 +2,14 @@ import {Component, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {CalendarComponent} from "../../../schedule-x/angular/src/lib/calendar.component";
 import {createCalendar, viewWeek, viewMonthGrid, viewMonthAgenda} from "@schedule-x/calendar";
-import {isPlatformBrowser, NgIf} from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import '@schedule-x/theme-default/dist/calendar.css'
 import {createEventModalPlugin} from "@schedule-x/event-modal";
 import {createDragAndDropPlugin} from "@schedule-x/drag-and-drop";
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, CalendarComponent, NgIf],
+    imports: [RouterOutlet, CalendarComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })

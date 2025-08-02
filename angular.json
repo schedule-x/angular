@@ -64,7 +64,7 @@
             ],
             "scripts": [],
             "server": "projects/development/src/main.server.ts",
-            "prerender": true,
+            "prerender": false,
             "ssr": {
               "entry": "projects/development/server.ts"
             }
@@ -156,5 +156,8 @@
     "@schematics/angular:resolver": {
       "typeSeparator": "."
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

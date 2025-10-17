@@ -86,16 +86,14 @@ export class CalendarComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     if (typeof window !== 'object') return;
-    if (typeof document !== 'undefined') {
-      // safe to use document here
-      const calendarElement = document?.getElementById(this.calendarElementId);
-      if (!(calendarElement instanceof HTMLElement)) {
-        throw new Error('No calendar element found');
-      }
 
-      this.setCustomComponentFns();
-      this.calendarApp.render(calendarElement);
+    const calendarElement = document?.getElementById(this.calendarElementId);
+    if (!(calendarElement instanceof HTMLElement)) {
+      throw new Error('No calendar element found');
     }
+
+    this.setCustomComponentFns();
+    this.calendarApp?.render(calendarElement);
   }
 
   private setCustomComponentFns() {

@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from '../../../schedule-x/angular/src/lib/calendar.component';
 import {
@@ -19,7 +19,7 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'development';
   calendarApp: CalendarApp;
   constructor(@Inject(PLATFORM_ID) private platformId: string) {}

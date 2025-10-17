@@ -3,25 +3,26 @@ import {
   Component,
   ContentChild,
   Input,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
-import {CalendarApp} from "@schedule-x/calendar";
-import {CustomComponentMeta, CustomComponentsMeta} from "../types/custom-components";
-import {createCustomComponentFn} from "../utils/create-custom-component-fn";
+import { CalendarApp } from '@schedule-x/calendar';
+import {
+  CustomComponentMeta,
+  CustomComponentsMeta,
+} from '../types/custom-components';
+import { createCustomComponentFn } from '../utils/create-custom-component-fn';
 
-import {SxPortalComponent} from "../utils/sx-portal.component";
+import { SxPortalComponent } from '../utils/sx-portal.component';
 
 export const randomStringId = () =>
-  's' + Math.random().toString(36).substring(2, 11)
+  's' + Math.random().toString(36).substring(2, 11);
 
 @Component({
-    selector: 'sx-calendar',
-    imports: [
-    SxPortalComponent
-],
-    template: `
+  selector: 'sx-calendar',
+  imports: [SxPortalComponent],
+  template: `
     <div [attr.id]="calendarElementId" class="ng-calendar-wrapper"></div>
-    
+
     @for (comp of customComponentsMeta; track comp) {
       <sx-portal
         [wrapperElement]="comp.wrapperElement"
@@ -30,8 +31,8 @@ export const randomStringId = () =>
         [props]="comp.props"
       ></sx-portal>
     }
-    `,
-    styles: ``
+  `,
+  styles: ``,
 })
 export class CalendarComponent implements AfterViewInit {
   @Input() calendarApp: CalendarApp;
@@ -40,148 +41,205 @@ export class CalendarComponent implements AfterViewInit {
   @ContentChild('dateGridEvent') dateGridEvent: TemplateRef<any>;
   @ContentChild('monthGridEvent') monthGridEvent: TemplateRef<any>;
   @ContentChild('monthAgendaEvent') monthAgendaEvent: TemplateRef<any>;
-  @ContentChild('headerContentLeftPrepend') headerContentLeftPrepend: TemplateRef<any>;
-  @ContentChild('headerContentLeftAppend') headerContentLeftAppend: TemplateRef<any>;
-  @ContentChild('headerContentRightPrepend') headerContentRightPrepend: TemplateRef<any>;
-  @ContentChild('headerContentRightAppend') headerContentRightAppend: TemplateRef<any>;
+  @ContentChild('headerContentLeftPrepend')
+  headerContentLeftPrepend: TemplateRef<any>;
+  @ContentChild('headerContentLeftAppend')
+  headerContentLeftAppend: TemplateRef<any>;
+  @ContentChild('headerContentRightPrepend')
+  headerContentRightPrepend: TemplateRef<any>;
+  @ContentChild('headerContentRightAppend')
+  headerContentRightAppend: TemplateRef<any>;
   @ContentChild('headerContent') headerContent: TemplateRef<any>;
   @ContentChild('eventModal') eventModal: TemplateRef<any>;
 
-  customComponentsMeta: CustomComponentsMeta = []
+  customComponentsMeta: CustomComponentsMeta = [];
 
   public calendarElementId = randomStringId();
 
   getTemplate(componentName: string): TemplateRef<any> {
-    if (componentName === 'timeGridEvent') return this.timeGridEvent
+    if (componentName === 'timeGridEvent') return this.timeGridEvent;
 
-    if (componentName === 'dateGridEvent') return this.dateGridEvent
+    if (componentName === 'dateGridEvent') return this.dateGridEvent;
 
-    if (componentName === 'monthGridEvent') return this.monthGridEvent
+    if (componentName === 'monthGridEvent') return this.monthGridEvent;
 
-    if (componentName === 'monthAgendaEvent') return this.monthAgendaEvent
+    if (componentName === 'monthAgendaEvent') return this.monthAgendaEvent;
 
-    if (componentName === 'eventModal') return this.eventModal
+    if (componentName === 'eventModal') return this.eventModal;
 
-    if (componentName === 'headerContentLeftPrepend') return this.headerContentLeftPrepend
+    if (componentName === 'headerContentLeftPrepend')
+      return this.headerContentLeftPrepend;
 
-    if (componentName === 'headerContentLeftAppend') return this.headerContentLeftAppend
+    if (componentName === 'headerContentLeftAppend')
+      return this.headerContentLeftAppend;
 
-    if (componentName === 'headerContentRightPrepend') return this.headerContentRightPrepend
+    if (componentName === 'headerContentRightPrepend')
+      return this.headerContentRightPrepend;
 
-    if (componentName === 'headerContentRightAppend') return this.headerContentRightAppend
+    if (componentName === 'headerContentRightAppend')
+      return this.headerContentRightAppend;
 
-    if (componentName === 'headerContent') return this.headerContent
+    if (componentName === 'headerContent') return this.headerContent;
 
-    throw new Error(`No template found for component name: ${componentName}`)
+    throw new Error(`No template found for component name: ${componentName}`);
   }
 
   ngAfterViewInit() {
-    if (typeof window !== 'object') return
+    if (typeof window !== 'object') return;
+    if (typeof document !== 'undefined') {
+      // safe to use document here
+      const calendarElement = document?.getElementById(this.calendarElementId);
+      if (!(calendarElement instanceof HTMLElement)) {
+        throw new Error('No calendar element found');
+      }
 
-    const calendarElement = document.getElementById(this.calendarElementId);
-    if (!(calendarElement instanceof HTMLElement)) {
-      throw new Error('No calendar element found')
+      this.setCustomComponentFns();
+      this.calendarApp.render(calendarElement);
     }
-
-    this.setCustomComponentFns()
-    this.calendarApp.render(calendarElement)
   }
 
   private setCustomComponentFns() {
     if (this.timeGridEvent) {
       this.calendarApp._setCustomComponentFn(
         'timeGridEvent',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.timeGridEvent, 'timeGridEvent')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.timeGridEvent,
+          'timeGridEvent',
+        ),
+      );
     }
 
     if (this.dateGridEvent) {
       this.calendarApp._setCustomComponentFn(
         'dateGridEvent',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.dateGridEvent, 'dateGridEvent')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.dateGridEvent,
+          'dateGridEvent',
+        ),
+      );
     }
 
     if (this.monthGridEvent) {
       this.calendarApp._setCustomComponentFn(
         'monthGridEvent',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.monthGridEvent, 'monthGridEvent')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.monthGridEvent,
+          'monthGridEvent',
+        ),
+      );
     }
 
     if (this.monthAgendaEvent) {
       this.calendarApp._setCustomComponentFn(
         'monthAgendaEvent',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.monthAgendaEvent, 'monthAgendaEvent')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.monthAgendaEvent,
+          'monthAgendaEvent',
+        ),
+      );
     }
 
     if (this.eventModal) {
       this.calendarApp._setCustomComponentFn(
         'eventModal',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.eventModal, 'eventModal')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.eventModal,
+          'eventModal',
+        ),
+      );
     }
 
     if (this.headerContentLeftPrepend) {
       this.calendarApp._setCustomComponentFn(
         'headerContentLeftPrepend',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentLeftPrepend, 'headerContentLeftPrepend')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.headerContentLeftPrepend,
+          'headerContentLeftPrepend',
+        ),
+      );
     }
 
     if (this.headerContentLeftAppend) {
       this.calendarApp._setCustomComponentFn(
         'headerContentLeftAppend',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentLeftAppend, 'headerContentLeftAppend')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.headerContentLeftAppend,
+          'headerContentLeftAppend',
+        ),
+      );
     }
 
     if (this.headerContentRightPrepend) {
       this.calendarApp._setCustomComponentFn(
         'headerContentRightPrepend',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentRightPrepend, 'headerContentRightPrepend')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.headerContentRightPrepend,
+          'headerContentRightPrepend',
+        ),
+      );
     }
 
     if (this.headerContentRightAppend) {
       this.calendarApp._setCustomComponentFn(
         'headerContentRightAppend',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContentRightAppend, 'headerContentRightAppend')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.headerContentRightAppend,
+          'headerContentRightAppend',
+        ),
+      );
     }
 
     if (this.headerContent) {
       this.calendarApp._setCustomComponentFn(
         'headerContent',
-        createCustomComponentFn(this.setCustomComponentMeta.bind(this), this.headerContent, 'headerContent')
-      )
+        createCustomComponentFn(
+          this.setCustomComponentMeta.bind(this),
+          this.headerContent,
+          'headerContent',
+        ),
+      );
     }
   }
 
   setCustomComponentMeta = (component: CustomComponentMeta) => {
-    const wrapperWasDetached = !(component.wrapperElement instanceof HTMLElement);
-    if (wrapperWasDetached) return
+    const wrapperWasDetached = !(
+      component.wrapperElement instanceof HTMLElement
+    );
+    if (wrapperWasDetached) return;
 
-    const filterOutComponentsWithDetachedWrappers = ({ wrapperElement }: { wrapperElement: HTMLElement | null }) =>
-      wrapperElement instanceof HTMLElement
+    const filterOutComponentsWithDetachedWrappers = ({
+      wrapperElement,
+    }: {
+      wrapperElement: HTMLElement | null;
+    }) => wrapperElement instanceof HTMLElement;
     const newCustomComponents = [
-      ...this.customComponentsMeta.filter(filterOutComponentsWithDetachedWrappers)
-    ]
+      ...this.customComponentsMeta.filter(
+        filterOutComponentsWithDetachedWrappers,
+      ),
+    ];
 
-    const ccid = component.wrapperElement.dataset['ccid']
+    const ccid = component.wrapperElement.dataset['ccid'];
     const existingComponent = newCustomComponents.find(
-      ({ wrapperElement }) => wrapperElement.dataset['ccid'] === ccid
-    )
+      ({ wrapperElement }) => wrapperElement.dataset['ccid'] === ccid,
+    );
 
     if (existingComponent) {
-      existingComponent.wrapperElement.innerHTML = ''
+      existingComponent.wrapperElement.innerHTML = '';
       newCustomComponents.splice(
         newCustomComponents.indexOf(existingComponent),
-        1
-      )
+        1,
+      );
     }
 
-    this.customComponentsMeta = [...newCustomComponents, component]
-  }
+    this.customComponentsMeta = [...newCustomComponents, component];
+  };
 }

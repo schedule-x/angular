@@ -3,15 +3,16 @@ import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from '../../../schedule-x/angular/src/lib/calendar.component';
 import {
   createCalendar,
-  viewWeek,
-  viewMonthGrid,
-  viewMonthAgenda,
   CalendarApp,
+  createViewWeek,
+  createViewMonthGrid,
+  createViewMonthAgenda,
 } from '@schedule-x/calendar';
 import { isPlatformBrowser } from '@angular/common';
 import '@schedule-x/theme-default/dist/calendar.css';
 import { createEventModalPlugin } from '@schedule-x/event-modal';
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop';
+import 'temporal-polyfill/global';
 
 @Component({
   selector: 'app-root',
@@ -27,33 +28,27 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.calendarApp = createCalendar({
+        showWeekNumbers: true,
         events: [
           {
             id: '1',
             title: 'Event 1',
-            start: '2024-06-11 08:00',
-            end: '2024-06-11 09:00',
+            start: Temporal.Now.zonedDateTimeISO(),
+            end: Temporal.Now.zonedDateTimeISO().add({ hours: 1 }),
           },
+
           {
             id: '2',
             title: 'Event 2',
-            start: '2024-06-11 10:00',
-            end: '2024-06-11 11:00',
-          },
-          {
-            id: '3',
-            title: 'Event 3',
-            start: '2024-06-11',
-            end: '2024-06-11',
-          },
-          {
-            id: '4',
-            title: 'Event 4',
-            start: '2024-06-11',
-            end: '2024-06-13',
+            start: Temporal.Now.zonedDateTimeISO().add({ days: 1 }),
+            end: Temporal.Now.zonedDateTimeISO().add({ days: 1, hours: 1 }),
           },
         ],
-        views: [viewWeek, viewMonthGrid, viewMonthAgenda],
+        views: [
+          createViewWeek(),
+          createViewMonthGrid(),
+          createViewMonthAgenda(),
+        ],
         plugins: [createEventModalPlugin(), createDragAndDropPlugin()],
       });
     }
@@ -64,23 +59,19 @@ export class AppComponent implements OnInit {
   }
 
   setEvents() {
-    // const allEvents = this.calendarApp.events.getAll()
-    // allEvents.forEach(event => {
-    //   event.title = 'New Title'
-    // })
-    // this.calendarApp.events.set(allEvents)
     this.calendarApp.events.set([
       {
         id: '5',
         title: 'Event 5',
-        start: '2024-06-11 08:00',
-        end: '2024-06-11 09:00',
+        start: Temporal.Now.plainDateISO().add({ days: 2 }),
+        end: Temporal.Now.plainDateISO().add({ days: 2, hours: 1 }),
       },
+
       {
         id: '6',
         title: 'Event 6',
-        start: '2024-06-11 10:00',
-        end: '2024-06-11 11:00',
+        start: Temporal.Now.zonedDateTimeISO().add({ days: 1 }),
+        end: Temporal.Now.zonedDateTimeISO().add({ days: 1, hours: 1 }),
       },
     ]);
   }

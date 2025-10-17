@@ -92,6 +92,10 @@ export class CalendarComponent implements AfterViewInit {
       throw new Error('No calendar element found');
     }
 
+    if (this.calendarApp == null) {
+      return;
+    }
+
     this.setCustomComponentFns();
     this.calendarApp?.render(calendarElement);
   }

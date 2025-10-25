@@ -45,7 +45,7 @@
     "@semantic-release/git": "^10.0.1",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
-    "@types/node": "^20.17.19",
+    "@types/node": "^22.0.0",
     "angular-eslint": "^20.1.1",
     "eslint": "^9.8.0",
     "jasmine-core": "~5.1.0",

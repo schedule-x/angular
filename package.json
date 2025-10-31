@@ -48,7 +48,6 @@
     "ng-packagr": "^20.1.0",
     "semantic-release": "^24.0.0",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.38.0",
-    "yalc": "^1.0.0-pre.53"
+    "typescript-eslint": "^8.38.0"
   }
 }

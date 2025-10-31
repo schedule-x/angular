@@ -3,8 +3,8 @@
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
 <!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * *Uncomment sections of the template below * * * * * -->
+<!-- * * * * * * * to inject custom components * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <style>
@@ -21,8 +21,101 @@
   <div class="content">
     <button (click)="setEvents()">set events</button>
 
-    @if (isBrowserOnly) {
-      <sx-calendar [calendarApp]="calendarApp"> </sx-calendar>
+ @if (isBrowserOnly) {
+      <sx-calendar [calendarApp]="calendarApp">
+        <!-- <ng-template #headerContent> -->
+        <!--   <div>Custom header</div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #headerContentLeftPrepend> -->
+        <!--   <div>L prepend</div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #headerContentLeftAppend> -->
+        <!--   <div>L append</div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #headerContentRightPrepend> -->
+        <!--   <div>R prepend</div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #headerContentRightAppend> -->
+        <!--   <div>R append</div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #timeGridEvent let-arg> -->
+        <!--   <div -->
+        <!--     style=" -->
+        <!--       background-color: #d6c5ea; -->
+        <!--       border: 2px solid #856dc0; -->
+        <!--       height: 100%; -->
+        <!--       width: 100%; -->
+        <!--       border-radius: 5px; -->
+        <!--       padding: 5px; -->
+        <!--     " -->
+        <!--   > -->
+        <!--     <div>Time grid event: {{ arg.calendarEvent.title }}</div> -->
+        <!--   </div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #dateGridEvent let-arg> -->
+        <!--   <div -->
+        <!--     style=" -->
+        <!--       overflow: hidden; -->
+        <!--       display: flex; -->
+        <!--       align-items: center; -->
+        <!--       background-color: #d6c5ea; -->
+        <!--       border: 2px solid #856dc0; -->
+        <!--       height: 100%; -->
+        <!--       width: 100%; -->
+        <!--       border-radius: 5px; -->
+        <!--     " -->
+        <!--   > -->
+        <!--     <div>Date grid: {{ arg.calendarEvent.title }}</div> -->
+        <!--   </div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #monthGridEvent let-arg> -->
+        <!--   <div -->
+        <!--     style=" -->
+        <!--       overflow: hidden; -->
+        <!--       display: flex; -->
+        <!--       align-items: center; -->
+        <!--       background-color: #d6c5ea; -->
+        <!--       border: 2px solid #856dc0; -->
+        <!--       height: 100%; -->
+        <!--       width: 100%; -->
+        <!--       border-radius: 5px; -->
+        <!--     " -->
+        <!--   > -->
+        <!--     <div>Month grid: {{ arg.calendarEvent.title }}</div> -->
+        <!--   </div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #monthAgendaEvent let-arg> -->
+        <!--   <div -->
+        <!--     style=" -->
+        <!--       overflow: hidden; -->
+        <!--       display: flex; -->
+        <!--       align-items: center; -->
+        <!--       background-color: #d6c5ea; -->
+        <!--       border: 2px solid #856dc0; -->
+        <!--       height: 100%; -->
+        <!--       width: 100%; -->
+        <!--       border-radius: 5px; -->
+        <!--     " -->
+        <!--   > -->
+        <!--     <div>Month agenda: {{ arg.calendarEvent.title }}</div> -->
+        <!--   </div> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template #eventModal let-arg> -->
+        <!--   <div -->
+        <!--     style=" -->
+        <!--       overflow: hidden; -->
+        <!--       display: flex; -->
+        <!--       align-items: center; -->
+        <!--       border: 2px solid black; -->
+        <!--       height: 100%; -->
+        <!--       width: 100%; -->
+        <!--       border-radius: 5px; -->
+        <!--     " -->
+        <!--   > -->
+        <!--     <div>Event modal: {{ arg.calendarEvent.title }}</div> -->
+        <!--   </div> -->
+        <!-- </ng-template> -->
+      </sx-calendar>
     }
   </div>
 </main>

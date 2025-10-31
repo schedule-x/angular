@@ -28,10 +28,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/schedule-x/angular/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
@@ -49,9 +46,7 @@
             "outputPath": "dist/development",
             "index": "projects/development/src/index.html",
             "browser": "projects/development/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/development/tsconfig.app.json",
             "assets": [
               {
@@ -59,15 +54,8 @@
                 "input": "projects/development/public"
               }
             ],
-            "styles": [
-              "projects/development/src/styles.css"
-            ],
-            "scripts": [],
-            "server": "projects/development/src/main.server.ts",
-            "prerender": false,
-            "ssr": {
-              "entry": "projects/development/server.ts"
-            }
+            "styles": ["projects/development/src/styles.css"],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -83,7 +71,12 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "server": "projects/development/src/main.server.ts",
+              "prerender": false,
+              "ssr": {
+                "entry": "projects/development/server.ts"
+              }
             },
             "development": {
               "optimization": false,
@@ -111,10 +104,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/development/tsconfig.spec.json",
             "assets": [
               {
@@ -122,9 +112,7 @@
                 "input": "projects/development/public"
               }
             ],
-            "styles": [
-              "projects/development/src/styles.css"
-            ],
+            "styles": ["projects/development/src/styles.css"],
             "scripts": []
           }
         }

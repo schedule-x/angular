@@ -4,16 +4,18 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": [
-      "node"
-    ]
+    "baseUrl": ".",
+    "paths": {
+      "@schedule-x/angular": [
+        "../../projects/schedule-x/angular/src/public-api.ts"
+      ],
+      "@schedule-x/angular/*": ["../../projects/schedule-x/angular/src/*"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node"]
   },
-  "files": [
-    "src/main.ts",
-    "src/main.server.ts",
-    "server.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts", "src/main.server.ts", "server.ts"],
+  "include": ["src/**/*.d.ts", "src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/test.ts"]
 }

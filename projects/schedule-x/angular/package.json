@@ -12,6 +12,7 @@
   "peerDependencies": {
     "@angular/common": "14 - 20",
     "@angular/core": "14 - 20",
+    "temporal-polyfill": "^0.3.0",
     "@schedule-x/calendar": "^3.3.0"
   },
   "dependencies": {

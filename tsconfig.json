@@ -4,9 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@schedule-x/angular": [
-        "./dist/schedule-x/angular"
-      ]
+      "@schedule-x/angular": ["./projects/schedule-x/angular/src/public-api.ts"],
+      "@schedule-x/angular/*": ["./projects/schedule-x/angular/src/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
@@ -24,10 +23,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {

@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CalendarComponent } from '../../../schedule-x/angular/src/lib/calendar.component';
+import { CalendarComponent } from '@schedule-x/angular';
 import {
   createCalendar,
   CalendarApp,
@@ -16,7 +15,7 @@ import 'temporal-polyfill/global';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CalendarComponent],
+  imports: [CalendarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

@@ -12,16 +12,15 @@
     "watch": "ng build @schedule-x/angular --watch --configuration development",
     "test": "ng test",
     "serve:ssr:development": "node dist/development/server/server.mjs",
-    "lint": "ng lint",
-    "dev:watch": "ng build @schedule-x/angular --watch --configuration development"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
     "temporal-polyfill": "^0.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "^19.0.0 || ^20.0.0",
-    "@angular/core": "^19.0.0 || ^20.0.0"
+    "@angular/common": "14 - 20",
+    "@angular/core": "14 - 20"
   },
   "devDependencies": {
     "@angular/build": "^20.1.2",

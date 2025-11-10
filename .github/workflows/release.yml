@@ -14,7 +14,7 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
     steps:
       - name: Checkout ✅
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}

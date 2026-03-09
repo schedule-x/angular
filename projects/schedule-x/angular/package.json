@@ -8,11 +8,11 @@
     "name": "Tom Österlund",
     "email": "tom@schedule-x.dev"
   },
-  "version": "3.2.0",
+  "version": "4.0.0",
   "peerDependencies": {
     "@angular/common": "14 - 21",
     "@angular/core": "14 - 21",
-    "@schedule-x/calendar": "^3.3.0"
+    "@schedule-x/calendar": "^4.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

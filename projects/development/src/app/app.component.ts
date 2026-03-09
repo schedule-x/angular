@@ -11,7 +11,6 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import '@schedule-x/theme-default/dist/calendar.css';
 import { createEventModalPlugin } from '@schedule-x/event-modal';
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop';
 import 'temporal-polyfill/global';
 
 @Component({
@@ -49,7 +48,7 @@ export class AppComponent implements OnInit {
           createViewMonthGrid(),
           createViewMonthAgenda(),
         ],
-        plugins: [createEventModalPlugin(), createDragAndDropPlugin()],
+        plugins: [createEventModalPlugin()],
       });
     }
   }

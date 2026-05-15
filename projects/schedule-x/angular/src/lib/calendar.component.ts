@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   Input,
+  OnDestroy,
   TemplateRef,
 } from '@angular/core';
 import { CalendarApp } from '@schedule-x/calendar';
@@ -34,7 +36,7 @@ export const randomStringId = () =>
   `,
   styles: ``,
 })
-export class CalendarComponent implements AfterViewInit {
+export class CalendarComponent implements AfterViewInit, OnDestroy {
   @Input() calendarApp: CalendarApp;
 
   @ContentChild('timeGridEvent') timeGridEvent: TemplateRef<any>;
@@ -55,6 +57,9 @@ export class CalendarComponent implements AfterViewInit {
   customComponentsMeta: CustomComponentsMeta = [];
 
   public calendarElementId = randomStringId();
+  private isDestroyed = false;
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   getTemplate(componentName: string): TemplateRef<any> {
     if (componentName === 'timeGridEvent') return this.timeGridEvent;
@@ -84,7 +89,7 @@ export class CalendarComponent implements AfterViewInit {
     throw new Error(`No template found for component name: ${componentName}`);
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     if (typeof window !== 'object') return;
 
     const calendarElement = document?.getElementById(this.calendarElementId);
@@ -96,8 +101,21 @@ export class CalendarComponent implements AfterViewInit {
       return;
     }
 
+    // Schedule-X renders synchronously and can request custom component portals
+    // during that render. If this happens inside Angular's current
+    // AfterViewInit check, dev mode sees customComponentsMeta change from
+    // [] to a wrapper element and throws ExpressionChangedAfterItHasBeenCheckedError.
+    // Deferring one microtask starts the external render after this check settles.
+    await Promise.resolve();
+
+    if (this.isDestroyed) return;
+
     this.setCustomComponentFns();
     this.calendarApp?.render(calendarElement);
+  }
+
+  ngOnDestroy() {
+    this.isDestroyed = true;
   }
 
   private setCustomComponentFns() {
@@ -213,6 +231,8 @@ export class CalendarComponent implements AfterViewInit {
   }
 
   setCustomComponentMeta = (component: CustomComponentMeta) => {
+    if (this.isDestroyed) return;
+
     const wrapperWasDetached = !(
       component.wrapperElement instanceof HTMLElement
     );
@@ -243,5 +263,10 @@ export class CalendarComponent implements AfterViewInit {
     }
 
     this.customComponentsMeta = [...newCustomComponents, component];
+
+    // Custom component callbacks originate from Schedule-X/Preact, outside of
+    // Angular's normal template event flow. Run a local detection pass so the
+    // portal created above is reconciled immediately.
+    this.changeDetectorRef.detectChanges();
   };
 }
